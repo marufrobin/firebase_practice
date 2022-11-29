@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
 
     Future addUser() async {
       CollectionReference _users =
-          await FirebaseFirestore.instance.collection("Register");
+          await FirebaseFirestore.instance.collection("robin");
       _users.add(({
         'name': _nameController.text,
         'phone': _phoneController.text,
