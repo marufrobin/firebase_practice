@@ -20,6 +20,10 @@ class HomePage extends StatelessWidget {
         'age': _ageController.text,
         'address': _addressController.text,
       }));
+      _nameController.clear();
+      _phoneController.clear();
+      _ageController.clear();
+      _addressController.clear();
     }
 
     return Scaffold(
