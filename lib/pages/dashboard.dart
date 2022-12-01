@@ -95,6 +95,23 @@ class _DashBoardState extends State<DashBoard> {
                     buildTextField(_phoneControll, "Enter phone number"),
                     SizedBox(height: 16),
                     buildTextField(_emailControll, "Enter email"),
+                    SizedBox(height: 16),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16))),
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff42ED18))),
+                        onPressed: () {},
+                        child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 130, vertical: 16),
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                  fontSize: 20, color: Color(0xff1B1313)),
+                            )))
                   ],
                 ),
               ),
