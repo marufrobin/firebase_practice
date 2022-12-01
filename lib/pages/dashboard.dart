@@ -50,8 +50,10 @@ class _DashBoardState extends State<DashBoard> {
                         borderRadius: BorderRadius.circular(16)),
                     margin: EdgeInsets.all(4),
                   ))),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+          backgroundColor: Color(0xff42ED18)),
     );
   }
 }
