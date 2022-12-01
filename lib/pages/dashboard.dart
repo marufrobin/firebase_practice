@@ -78,14 +78,24 @@ class _DashBoardState extends State<DashBoard> {
                   top: 80,
                 ),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(26),
+                      topLeft: Radius.circular(26)),
                   color: Color(0xffCCF1D4),
                 ),
               ),
               Positioned(
-                left: 110,
+                left: 116,
                 child: CircleAvatar(
                   backgroundColor: Color(0xffE2FCE7),
                   radius: 80,
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.add_photo_alternate_rounded,
+                        size: 30,
+                        color: Color(0xff795D5D),
+                      )),
                 ),
               ),
             ],
