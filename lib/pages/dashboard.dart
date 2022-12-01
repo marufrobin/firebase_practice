@@ -83,6 +83,12 @@ class _DashBoardState extends State<DashBoard> {
                       topLeft: Radius.circular(26)),
                   color: Color(0xffCCF1D4),
                 ),
+                child: Column(
+                  children: [
+                    TextField(
+                        decoration: InputDecoration(hintText: "Enter name")),
+                  ],
+                ),
               ),
               Positioned(
                 left: 116,
