@@ -35,6 +35,7 @@ class _DashBoardState extends State<DashBoard> {
         ],
       ),
       body: GridView.count(
+          childAspectRatio: (1 / 1.2),
           crossAxisCount: 2,
           scrollDirection: Axis.vertical,
           physics: BouncingScrollPhysics(),
@@ -43,9 +44,14 @@ class _DashBoardState extends State<DashBoard> {
           children: List.generate(
               16,
               (index) => Container(
-                    margin: EdgeInsets.all(8),
-                    color: Colors.blue,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xff42ED18), width: 2),
+                        color: Color(0xffCCF1D4),
+                        borderRadius: BorderRadius.circular(16)),
+                    margin: EdgeInsets.all(4),
                   ))),
+      floatingActionButton:
+          FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
     );
   }
 }
