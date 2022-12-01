@@ -51,9 +51,47 @@ class _DashBoardState extends State<DashBoard> {
                     margin: EdgeInsets.all(4),
                   ))),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            buildAddStudent(context);
+          },
           child: Icon(Icons.add),
           backgroundColor: Color(0xff42ED18)),
+    );
+  }
+
+  Future<dynamic> buildAddStudent(BuildContext context) {
+    return showModalBottomSheet(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      isDismissible: true,
+      context: context,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.66,
+          color: Colors.transparent,
+          child: Stack(
+            children: [
+              Container(
+                // height: MediaQuery.of(context).size.height * 0.5,
+                margin: EdgeInsets.only(
+                  top: 80,
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xffCCF1D4),
+                ),
+              ),
+              Positioned(
+                left: 110,
+                child: CircleAvatar(
+                  backgroundColor: Color(0xffE2FCE7),
+                  radius: 80,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
