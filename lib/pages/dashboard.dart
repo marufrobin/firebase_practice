@@ -8,6 +8,10 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  TextEditingController _nameControll = TextEditingController();
+  TextEditingController _phoneControll = TextEditingController();
+  TextEditingController _emailControll = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +72,7 @@ class _DashBoardState extends State<DashBoard> {
       context: context,
       builder: (context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.66,
+          height: MediaQuery.of(context).size.height * 0.8,
           color: Colors.transparent,
           child: Stack(
             children: [
@@ -77,6 +81,7 @@ class _DashBoardState extends State<DashBoard> {
                 margin: EdgeInsets.only(
                   top: 80,
                 ),
+                padding: EdgeInsets.only(top: 80, left: 16, right: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(26),
@@ -85,29 +90,60 @@ class _DashBoardState extends State<DashBoard> {
                 ),
                 child: Column(
                   children: [
-                    TextField(
-                        decoration: InputDecoration(hintText: "Enter name")),
+                    buildTextField(_nameControll, "Enter name"),
+                    SizedBox(height: 16),
+                    buildTextField(_phoneControll, "Enter phone number"),
+                    SizedBox(height: 16),
+                    buildTextField(_emailControll, "Enter email"),
                   ],
                 ),
               ),
               Positioned(
-                left: 116,
+                left: 140,
+                top: 16,
                 child: CircleAvatar(
-                  backgroundColor: Color(0xffE2FCE7),
-                  radius: 80,
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.add_photo_alternate_rounded,
-                        size: 30,
-                        color: Color(0xff795D5D),
-                      )),
+                  radius: 62,
+                  backgroundColor: Color(0xff42ED18),
+                  child: CircleAvatar(
+                    backgroundColor: Color(0xffE2FCE7),
+                    radius: 60,
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.add_photo_alternate_rounded,
+                          size: 30,
+                          color: Color(0xff795D5D),
+                        )),
+                  ),
                 ),
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  TextField buildTextField(
+      TextEditingController controller, String textOnField) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: textOnField,
+        hintText: textOnField,
+        alignLabelWithHint: false,
+        fillColor: Colors.white,
+        focusColor: Color(0xff42ED18),
+        filled: true,
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            gapPadding: 2,
+            borderSide: BorderSide(color: Color(0xff42ED18))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            gapPadding: 2,
+            borderSide: BorderSide(color: Color(0xff42ED18))),
+      ),
     );
   }
 }
