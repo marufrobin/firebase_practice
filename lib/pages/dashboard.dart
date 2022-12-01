@@ -34,6 +34,18 @@ class _DashBoardState extends State<DashBoard> {
               ))
         ],
       ),
+      body: GridView.count(
+          crossAxisCount: 2,
+          scrollDirection: Axis.vertical,
+          physics: BouncingScrollPhysics(),
+          shrinkWrap: true,
+          padding: EdgeInsets.all(8),
+          children: List.generate(
+              16,
+              (index) => Container(
+                    margin: EdgeInsets.all(8),
+                    color: Colors.blue,
+                  ))),
     );
   }
 }
