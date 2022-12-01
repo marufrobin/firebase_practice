@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:firebase_practice/pages/home_page.dart';
+import 'package:firebase_practice/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 2),
         () => Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => DashBoard(),
             ),
             (route) => false));
     // TODO: implement initState
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: CircularProgressIndicator(
-          color: Colors.cyan,
+          color: Colors.lightGreen,
         ),
       ),
     );
