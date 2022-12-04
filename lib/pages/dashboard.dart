@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -11,6 +15,15 @@ class _DashBoardState extends State<DashBoard> {
   TextEditingController _nameControll = TextEditingController();
   TextEditingController _phoneControll = TextEditingController();
   TextEditingController _emailControll = TextEditingController();
+  final ImagePicker imagePicker = ImagePicker();
+  File? imageTemp;
+  XFile? xFile;
+  addImage() async {
+    xFile = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      File imageTemp = File(xFile!.path);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,13 +137,17 @@ class _DashBoardState extends State<DashBoard> {
                   child: CircleAvatar(
                     backgroundColor: Color(0xffE2FCE7),
                     radius: 60,
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.add_photo_alternate_rounded,
-                          size: 30,
-                          color: Color(0xff795D5D),
-                        )),
+                    child: xFile == null
+                        ? IconButton(
+                            onPressed: () {
+                              addImage();
+                            },
+                            icon: Icon(
+                              Icons.add_photo_alternate_rounded,
+                              size: 30,
+                              color: Color(0xff795D5D),
+                            ))
+                        : Image.file(imageTemp!),
                   ),
                 ),
               ),
