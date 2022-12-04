@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -17,6 +16,12 @@ class _DashBoardState extends State<DashBoard> {
   TextEditingController _emailControll = TextEditingController();
   final ImagePicker imagePicker = ImagePicker();
   File? imageTemp;
+  addImage() async {
+    XFile? xFile = await imagePicker.pickImage(source: ImageSource.camera);
+    File imageTemp = File(xFile!.path);
+    print("Image Path For the Fucking Picture: $imageTemp");
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +64,10 @@ class _DashBoardState extends State<DashBoard> {
                         color: Color(0xffCCF1D4),
                         borderRadius: BorderRadius.circular(16)),
                     margin: EdgeInsets.all(4),
+                    child: Expanded(
+                        child: imageTemp == null
+                            ? Placeholder()
+                            : Image.file(imageTemp!)),
                   ))),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -69,14 +78,7 @@ class _DashBoardState extends State<DashBoard> {
     );
   }
 
-  Future<dynamic> buildAddStudent(BuildContext context) {
-    addImage() async {
-      XFile? xFile = await imagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        File imageTemp = File(xFile!.path);
-      });
-    }
-
+  buildAddStudent(BuildContext context) {
     return showModalBottomSheet(
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -116,7 +118,10 @@ class _DashBoardState extends State<DashBoard> {
                                     borderRadius: BorderRadius.circular(16))),
                             backgroundColor:
                                 MaterialStateProperty.all(Color(0xff42ED18))),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {});
+                          Navigator.pop(context);
+                        },
                         child: Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal: 130, vertical: 16),
@@ -124,7 +129,11 @@ class _DashBoardState extends State<DashBoard> {
                               "Submit",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff1B1313)),
-                            )))
+                            ))),
+                    Expanded(
+                        child: imageTemp == null
+                            ? Placeholder()
+                            : Image.file(imageTemp!)),
                   ],
                 ),
               ),
@@ -135,21 +144,21 @@ class _DashBoardState extends State<DashBoard> {
                     radius: 62,
                     backgroundColor: Color(0xff42ED18),
                     child: CircleAvatar(
-                      backgroundColor: Color(0xffE2FCE7),
-                      radius: 60,
-                      child: IconButton(
-                        onPressed: () {
-                          addImage();
-                        },
-                        icon: imageTemp == null
-                            ? Icon(
-                                Icons.add_photo_alternate_rounded,
-                                size: 30,
-                                color: Color(0xff795D5D),
-                              )
-                            : Image.file(imageTemp!),
-                      ),
-                    )),
+                        backgroundColor: Color(0xffE2FCE7),
+                        radius: 60,
+                        child: GestureDetector(
+                          onTap: () {
+                            addImage();
+                            setState(() {});
+                          },
+                          child: imageTemp == null
+                              ? Icon(
+                                  Icons.add_photo_alternate_rounded,
+                                  size: 30,
+                                  color: Color(0xff795D5D),
+                                )
+                              : Image.file(imageTemp!),
+                        ))),
               ),
             ],
           ),
