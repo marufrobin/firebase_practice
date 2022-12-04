@@ -14,10 +14,13 @@ class _DashBoardState extends State<DashBoard> {
   TextEditingController _nameControll = TextEditingController();
   TextEditingController _phoneControll = TextEditingController();
   TextEditingController _emailControll = TextEditingController();
+
   final ImagePicker imagePicker = ImagePicker();
+  XFile? xFile;
   File? imageTemp;
+
   addImage() async {
-    XFile? xFile = await imagePicker.pickImage(source: ImageSource.camera);
+    xFile = await imagePicker.pickImage(source: ImageSource.camera);
     File imageTemp = File(xFile!.path);
     print("Image Path For the Fucking Picture: $imageTemp");
     setState(() {});
@@ -59,15 +62,12 @@ class _DashBoardState extends State<DashBoard> {
           children: List.generate(
               16,
               (index) => Container(
+                    padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         border: Border.all(color: Color(0xff42ED18), width: 2),
                         color: Color(0xffCCF1D4),
                         borderRadius: BorderRadius.circular(16)),
                     margin: EdgeInsets.all(4),
-                    child: Expanded(
-                        child: imageTemp == null
-                            ? Placeholder()
-                            : Image.file(imageTemp!)),
                   ))),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -78,7 +78,7 @@ class _DashBoardState extends State<DashBoard> {
     );
   }
 
-  buildAddStudent(BuildContext context) {
+  Future<dynamic> buildAddStudent(BuildContext context) {
     return showModalBottomSheet(
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -130,10 +130,6 @@ class _DashBoardState extends State<DashBoard> {
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff1B1313)),
                             ))),
-                    Expanded(
-                        child: imageTemp == null
-                            ? Placeholder()
-                            : Image.file(imageTemp!)),
                   ],
                 ),
               ),
@@ -143,22 +139,22 @@ class _DashBoardState extends State<DashBoard> {
                 child: CircleAvatar(
                     radius: 62,
                     backgroundColor: Color(0xff42ED18),
-                    child: CircleAvatar(
-                        backgroundColor: Color(0xffE2FCE7),
-                        radius: 60,
-                        child: GestureDetector(
-                          onTap: () {
-                            addImage();
-                            setState(() {});
-                          },
-                          child: imageTemp == null
-                              ? Icon(
-                                  Icons.add_photo_alternate_rounded,
-                                  size: 30,
-                                  color: Color(0xff795D5D),
-                                )
-                              : Image.file(imageTemp!),
-                        ))),
+                    child: imageTemp == null
+                        ? CircleAvatar(
+                            backgroundColor: Color(0xffE2FCE7),
+                            radius: 60,
+                            child: GestureDetector(
+                              onTap: () {
+                                addImage();
+                                print("file name print from onTap: $imageTemp");
+                              },
+                              child: Icon(
+                                Icons.add_photo_alternate_rounded,
+                                size: 30,
+                                color: Color(0xff795D5D),
+                              ),
+                            ))
+                        : Image.file(File(xFile!.path))),
               ),
             ],
           ),
